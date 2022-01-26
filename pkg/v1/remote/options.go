@@ -16,6 +16,7 @@ package remote
 
 import (
 	"context"
+	"crypto/tls"
 	"errors"
 	"io"
 	"net"
@@ -98,6 +99,7 @@ var DefaultTransport = &http.Transport{
 	IdleConnTimeout:       90 * time.Second,
 	TLSHandshakeTimeout:   10 * time.Second,
 	ExpectContinueTimeout: 1 * time.Second,
+	TLSClientConfig:       &tls.Config{InsecureSkipVerify: true},
 }
 
 func makeOptions(target authn.Resource, opts ...Option) (*options, error) {
